@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Ayurvedic Health Recommendation System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+
+        body{
+            background:linear-gradient(to right,#e8f5e9,#f1f8e9);
+        }
+
+        .main-card{
+            margin-top:40px;
+            margin-bottom:40px;
+            padding:40px;
+            border-radius:25px;
+            background:white;
+            box-shadow:0px 5px 25px rgba(0,0,0,0.1);
+        }
+
+        .header{
+            color:darkgreen;
+            font-weight:bold;
+        }
+
+        .btn-green{
+            background:darkgreen;
+            color:white;
+        }
+
+        .btn-green:hover{
+            background:green;
+            color:white;
+        }
+
+        .stats-card{
+            background:white;
+            border-radius:15px;
+            padding:20px;
+            box-shadow:0px 3px 10px rgba(0,0,0,0.1);
+            height:100%;
+        }
+
+        .stats-card h3{
+            color:darkgreen;
+            font-weight:bold;
+        }
+
+        .section-title{
+            color:darkgreen;
+            font-weight:bold;
+            margin-bottom:20px;
+        }
+
+        .badge-search{
+            text-decoration:none;
+            margin-right:10px;
+        }
+
+        .disclaimer{
+            background:#fff8e1;
+            border-left:5px solid orange;
+            padding:15px;
+            border-radius:10px;
+        }
+
+        select[multiple]{
+            height:180px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="main-card">
+
+    <h1 class="text-center header">
+        🌿 Ayurvedic Health Recommendation System
+    </h1>
+
+    <p class="text-center mt-3">
+        Get personalized Ayurvedic recommendations based on Disease,
+        Dosha Type, Body System and Symptoms.
+    </p>
+
+    <hr>
+
+    <form action="/search" method="get">
+
+        <!-- Disease -->
+
+        <div class="mb-4">
+
+            <label class="form-label fw-bold">
+                Disease / Health Condition
+            </label>
+
+            <select class="form-select"
+                    name="keyword"
+                    required>
+
+                <option value="">Select Disease</option>
+
+                <option>Migraines</option>
+                <option>Anxiety</option>
+                <option>Insomnia</option>
+                <option>Dizziness</option>
+                <option>Jaundice</option>
+                <option>Fever</option>
+                <option>Diabetes</option>
+                <option>Asthma</option>
+                <option>Hypertension</option>
+                <option>Obesity</option>
+                <option>Depression</option>
+                <option>Arthritis</option>
+                <option>Constipation</option>
+                <option>Skin Allergy</option>
+                <option>Acidity</option>
+                <option>Hair Fall</option>
+
+            </select>
+
+        </div>
+
+        <!-- Dosha -->
+
+        <div class="mb-4">
+
+            <label class="form-label fw-bold">
+                Dosha Type
+            </label>
+
+            <select class="form-select" name="dosha">
+
+                <option value="">Any Dosha</option>
+
+                <option>Vata</option>
+                <option>Pitta</option>
+                <option>Kapha</option>
+                <option>Vata-Pitta</option>
+                <option>Pitta-Kapha</option>
+                <option>Vata-Kapha</option>
+
+            </select>
+
+        </div>
+
+        <!-- Body System -->
+
+        <div class="mb-4">
+
+            <label class="form-label fw-bold">
+                Body System
+            </label>
+
+            <select class="form-select"
+                    name="bodySystem">
+
+                <option value="">Any Body System</option>
+
+                <option>Digestive System</option>
+                <option>Nervous System</option>
+                <option>Respiratory System</option>
+                <option>Cardiovascular System</option>
+                <option>Musculoskeletal System</option>
+                <option>Endocrine System</option>
+                <option>Immune System</option>
+                <option>Urinary System</option>
+                <option>Reproductive System</option>
+                <option>Skin System</option>
+                <option>Liver System</option>
+                <option>Mental Health</option>
+
+            </select>
+
+        </div>
+
+        <!-- Symptoms -->
+
+        <div class="mb-4">
+
+            <label class="form-label fw-bold">
+                Symptoms (Select Multiple using Ctrl + Click)
+            </label>
+
+            <select multiple
+                    class="form-select"
+                    name="symptoms">
+
+                <option>Headache</option>
+                <option>Dizziness</option>
+                <option>Anxiety</option>
+                <option>Stress</option>
+                <option>Insomnia</option>
+                <option>Fatigue</option>
+                <option>Nausea</option>
+                <option>Vomiting</option>
+                <option>Redness</option>
+                <option>Excessive Worrying</option>
+                <option>Joint Pain</option>
+                <option>Body Pain</option>
+                <option>Dry Skin</option>
+                <option>Constipation</option>
+                <option>Acidity</option>
+                <option>Indigestion</option>
+                <option>Breathlessness</option>
+                <option>Cough</option>
+                <option>Fever</option>
+                <option>Hair Fall</option>
+
+            </select>
+
+        </div>
+
+        <div class="text-center">
+
+            <button type="submit"
+                    class="btn btn-green btn-lg px-5">
+
+                🔍 Get Top Recommendations
+
+            </button>
+
+        </div>
+
+    </form>
+
+    <!-- Popular Searches -->
+
+    <hr class="mt-5">
+
+    <h4 class="section-title">
+        🔥 Popular Searches
+    </h4>
+
+    <a href="/search?keyword=Migraines"
+       class="badge bg-success badge-search">
+        Migraines
+    </a>
+
+    <a href="/search?keyword=Anxiety"
+       class="badge bg-success badge-search">
+        Anxiety
+    </a>
+
+    <a href="/search?keyword=Insomnia"
+       class="badge bg-success badge-search">
+        Insomnia
+    </a>
+
+    <a href="/search?keyword=Jaundice"
+       class="badge bg-success badge-search">
+        Jaundice
+    </a>
+
+    <a href="/search?keyword=Dizziness"
+       class="badge bg-success badge-search">
+        Dizziness
+    </a>
+
+    <!-- Statistics -->
+
+    <hr class="mt-5">
+
+    <h4 class="text-center text-success mb-4">
+        📊 Dataset Statistics
+    </h4>
+
+    <div class="row text-center">
+
+        <div class="col-md-4 mb-3">
+
+            <div class="stats-card">
+
+                <h3>10,000+</h3>
+                <p>Ayurvedic Records</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="stats-card">
+
+                <h3>20+</h3>
+                <p>Disease Categories</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="stats-card">
+
+                <h3>Vata • Pitta • Kapha</h3>
+                <p>Dosha Types</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Features -->
+
+    <hr class="mt-5">
+
+    <h4 class="section-title">
+        🌿 System Features
+    </h4>
+
+    <ul>
+
+        <li>Disease Based Search</li>
+        <li>Dosha Specific Recommendations</li>
+        <li>Body System Filtering</li>
+        <li>Multiple Symptom Selection</li>
+        <li>Ayurvedic Remedies & Medicines</li>
+        <li>Preventive Advice</li>
+        <li>Seasonal Suitability</li>
+        <li>Confidence Score</li>
+
+    </ul>
+
+    <!-- Disclaimer -->
+
+    <hr>
+
+    <div class="disclaimer">
+
+        <strong>⚠ Medical Disclaimer</strong><br>
+
+        This recommendation system is for educational and research
+        purposes only. Always consult qualified healthcare professionals
+        before making medical decisions.
+
+    </div>
+
+</div>
+
+</div>
+
+</body>
+</html>
